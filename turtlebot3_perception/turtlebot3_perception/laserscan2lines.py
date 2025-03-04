@@ -31,7 +31,7 @@ def laserscan2lines(scan: LaserScan):
     line_equations = []  # To store line equations
 
     # Detect multiple lines using iterative RANSAC
-    min_points_for_line = 25  # Minimum points to define a line
+    min_points_for_line = 15  # Minimum points to define a line
     ransac = RANSACRegressor(residual_threshold=0.1)
 
     while len(points) > min_points_for_line: 
@@ -62,6 +62,7 @@ def laserscan2lines(scan: LaserScan):
         # Extract inliers and outliers
         inlier_mask = ransac.inlier_mask_
         line_points = points[inlier_mask]
+
 
         # Save the detected line
         if len(line_points) >= min_points_for_line:
